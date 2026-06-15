@@ -11,7 +11,7 @@ export default function BackgroundMusic() {
 
     if (!audio) return
 
-    audio.volume = 0.2
+    audio.volume = 0.1
 
     audio.play()
       .then(() => setPlaying(true))

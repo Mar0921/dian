@@ -56,19 +56,25 @@ export async function POST(request: Request) {
       return NextResponse.json({ saved: false, existing: true })
     }
 
-    const { error: insertError } = await supabase.from("game_results").insert({
-      id: body.gameId,
-      pin: game.pin,
-      winner_name: winner.name,
-      winner_score: winner.score,
-      teams,
-    })
+    const { error: insertError } = await supabase.from("game_results").upsert(
+      {
+        id: body.gameId,
+        pin: game.pin,
+        winner_name: winner.name,
+        winner_score: winner.score,
+        teams,
+      },
+      {
+        onConflict: "id",
+        ignoreDuplicates: true,
+      },
+    )
 
     if (insertError) {
       throw insertError
     }
 
-    return NextResponse.json({ saved: true })
+    return NextResponse.json({ saved: false, existing: true })
   } catch (error) {
     console.error("Error guardando resultado:", error)
     return NextResponse.json(

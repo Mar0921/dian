@@ -7,7 +7,7 @@ import { Trophy, Home, Medal, Loader2 } from "lucide-react"
 import { SiteLogo } from "@/components/site-logo"
 import { toast } from "sonner"
 
-export function HostChampion({ game, teams }: { game: Game; teams: Team[] }) {
+export function HostChampion({ game, teams, allowSave = true }: { game: Game; teams: Team[]; allowSave?: boolean }) {
   const router = useRouter()
   const [saving, setSaving] = useState(false)
   const savedRef = useRef(false)
@@ -15,7 +15,7 @@ export function HostChampion({ game, teams }: { game: Game; teams: Team[] }) {
   const ranking = [...teams].sort((a, b) => b.score - a.score)
 
   useEffect(() => {
-    if (!["champion", "finished"].includes(game.status) || savedRef.current) {
+    if (!allowSave || !["champion", "finished"].includes(game.status) || savedRef.current) {
       return
     }
 
