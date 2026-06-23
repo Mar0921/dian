@@ -11,7 +11,7 @@ export default function HomePage() {
 
           <div className="space-y-1">
             <h2 className="mt-0 text-balance text-4xl font-extrabold sm:text-5xl">
-              El reto de la integridad pública
+              El reto de la integridad 
             </h2>
             <p className="text-pretty mx-auto max-w-xl text-lg text-muted-foreground leading-relaxed">
               Un juego de trivia multijugador en tiempo real sobre transparencia,
